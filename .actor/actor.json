@@ -1,0 +1,284 @@
+{
+  "actorSpecification": 1,
+  "name": "hirist-tech-scraper",
+  "title": "Hirist Tech Scraper — India Jobs API for Claude & ChatGPT",
+  "description": "Extract 60+ fields from Hirist.tech: AI/ML, DevOps, Backend jobs with salary, skills, company ratings & recruiter data. MCP-ready for AI agents.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "categories": ["JOBS"],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "Hirist Tech Jobs Dataset",
+      "description": "Indian tech job listings scraped from Hirist.tech with comprehensive fields",
+      "views": {
+        "overview": {
+          "title": "Overview",
+          "transformation": {
+            "fields": [
+              "title",
+              "company",
+              "location",
+              "experience",
+              "skills",
+              "metadata",
+              "url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Job Title",
+                "format": "text"
+              },
+              "company": {
+                "label": "Company",
+                "format": "object"
+              },
+              "location": {
+                "label": "Locations",
+                "format": "array"
+              },
+              "experience": {
+                "label": "Experience (Years)",
+                "format": "object"
+              },
+              "skills": {
+                "label": "Skills Required",
+                "format": "array"
+              },
+              "metadata": {
+                "label": "Metadata",
+                "format": "object"
+              },
+              "url": {
+                "label": "Job URL",
+                "format": "link"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "jobId": {
+          "type": "integer",
+          "title": "Job ID",
+          "description": "Unique job identifier from Hirist"
+        },
+        "title": {
+          "type": "string",
+          "title": "Job Title",
+          "description": "Full job title including company name"
+        },
+        "url": {
+          "type": "string",
+          "title": "Job URL",
+          "description": "Direct link to job posting on Hirist.tech",
+          "format": "url"
+        },
+        "company": {
+          "type": "object",
+          "title": "Company Information",
+          "description": "Hiring company details with AmbitionBox ratings",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Company Name"
+            },
+            "logo": {
+              "type": "string",
+              "title": "Company Logo URL",
+              "format": "url"
+            },
+            "rating": {
+              "type": "number",
+              "title": "AmbitionBox Rating"
+            },
+            "reviews": {
+              "type": "integer",
+              "title": "Review Count"
+            },
+            "about": {
+              "type": "string",
+              "title": "Company Description"
+            },
+            "founded": {
+              "type": "string",
+              "title": "Founded Year"
+            },
+            "employees": {
+              "type": "string",
+              "title": "Employee Count (India)"
+            },
+            "headquarters": {
+              "type": "string",
+              "title": "HQ Location"
+            },
+            "industry": {
+              "type": "string",
+              "title": "Industry"
+            }
+          }
+        },
+        "experience": {
+          "type": "object",
+          "title": "Experience Required",
+          "description": "Years of experience range",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "title": "Minimum Years"
+            },
+            "max": {
+              "type": "integer",
+              "title": "Maximum Years"
+            }
+          }
+        },
+        "salary": {
+          "type": "object",
+          "title": "Salary Information",
+          "description": "Salary range (often hidden by employers)",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "title": "Minimum Salary"
+            },
+            "max": {
+              "type": "integer",
+              "title": "Maximum Salary"
+            },
+            "hidden": {
+              "type": "boolean",
+              "title": "Salary Hidden"
+            },
+            "currency": {
+              "type": "string",
+              "title": "Currency Code"
+            }
+          }
+        },
+        "location": {
+          "type": "array",
+          "title": "Job Locations",
+          "description": "List of cities where job is available",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "title": "Skills Required",
+          "description": "Technical skills with mandatory flags",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Skill Name"
+              },
+              "mandatory": {
+                "type": "boolean",
+                "title": "Is Mandatory"
+              }
+            }
+          }
+        },
+        "description": {
+          "type": "object",
+          "title": "Job Description",
+          "description": "Full job description in HTML and text formats",
+          "properties": {
+            "html": {
+              "type": "string",
+              "title": "HTML Description"
+            },
+            "text": {
+              "type": "string",
+              "title": "Plain Text Description"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "title": "Job Metadata",
+          "description": "Additional job information and flags",
+          "properties": {
+            "posted": {
+              "type": "string",
+              "title": "Posted Date",
+              "format": "date-time"
+            },
+            "views": {
+              "type": "integer",
+              "title": "View Count"
+            },
+            "applications": {
+              "type": "integer",
+              "title": "Application Count"
+            },
+            "premium": {
+              "type": "boolean",
+              "title": "Premium Listing"
+            },
+            "workFromHome": {
+              "type": "boolean",
+              "title": "Work From Home"
+            },
+            "confidential": {
+              "type": "boolean",
+              "title": "Confidential Posting"
+            },
+            "category": {
+              "type": "integer",
+              "title": "Category ID"
+            },
+            "diversityHiring": {
+              "type": "object",
+              "title": "Diversity Flags",
+              "properties": {
+                "femaleCandidate": {
+                  "type": "boolean"
+                },
+                "differentlyAbled": {
+                  "type": "boolean"
+                },
+                "exDefence": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "recruiter": {
+          "type": "object",
+          "title": "Recruiter Information",
+          "description": "Details about the hiring recruiter",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Recruiter Name"
+            },
+            "title": {
+              "type": "string",
+              "title": "Job Title"
+            },
+            "lastActive": {
+              "type": "string",
+              "title": "Last Active Date"
+            }
+          }
+        },
+        "scrapedAt": {
+          "type": "string",
+          "title": "Scraped At",
+          "description": "Timestamp when job was scraped",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

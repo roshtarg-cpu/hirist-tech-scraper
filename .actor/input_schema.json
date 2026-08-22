@@ -1,0 +1,67 @@
+{
+  "title": "Hirist Tech Jobs Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "categories": {
+      "title": "Job Categories",
+      "type": "array",
+      "description": "Select job categories to scrape (AI/ML, Backend, Frontend, etc.)",
+      "editor": "stringList",
+      "default": ["ai-ml"],
+      "prefill": ["ai-ml", "data-engineering"],
+      "example": ["ai-ml", "backend-development", "devops-sre"]
+    },
+    "searchQuery": {
+      "title": "Search Keywords (Not supported yet)",
+      "type": "string",
+      "description": "Job title or keywords to search for (future feature)",
+      "editor": "textfield",
+      "prefill": "machine learning engineer"
+    },
+    "location": {
+      "title": "Location Filter (Not supported yet)",
+      "type": "string",
+      "description": "City or location (future feature)",
+      "editor": "textfield",
+      "prefill": "Bangalore"
+    },
+    "experienceMin": {
+      "title": "Minimum Experience (Years) - Not supported yet",
+      "type": "integer",
+      "description": "Minimum years of experience required (future feature)",
+      "editor": "number",
+      "prefill": 2,
+      "minimum": 0,
+      "maximum": 30
+    },
+    "includeDescription": {
+      "title": "Include Full Job Descriptions",
+      "type": "boolean",
+      "description": "Fetch detailed job descriptions (slower but more complete data)",
+      "editor": "checkbox",
+      "default": true,
+      "prefill": true
+    },
+    "maxResults": {
+      "title": "Maximum Results",
+      "type": "integer",
+      "description": "Maximum number of jobs to scrape across all categories",
+      "editor": "number",
+      "default": 50,
+      "prefill": 20,
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "type": "object",
+      "description": "Apify proxy settings (optional - API is scraper-friendly)",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": false
+      }
+    }
+  },
+  "required": ["maxResults"]
+}
