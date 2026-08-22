@@ -1,7 +1,7 @@
 {
   "actorSpecification": 1,
   "name": "hirist-tech-scraper",
-  "title": "Hirist Tech Scraper \u2014 India Jobs API for Claude & ChatGPT",
+  "title": "Hirist Tech Scraper — India Jobs API for Claude & ChatGPT",
   "description": "Extract 60+ fields from Hirist.tech: AI/ML, DevOps, Backend jobs with salary, skills, company ratings & recruiter data. MCP-ready for AI agents.",
   "version": "0.1",
   "buildTag": "latest",
@@ -31,5 +31,11 @@
         }
       }
     }
-  }
+  },
+  "pricingInfos": [
+    {
+      "perResult": 0.005,
+      "perRun": 0.05
+    }
+  ]
 }
