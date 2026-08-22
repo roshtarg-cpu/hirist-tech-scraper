@@ -60,18 +60,18 @@ async def scrape_category(client: httpx.AsyncClient, category_id: int, max_resul
     page = 0
     page_size = min(50, max_results)  # API max is typically 50
     
-    await Actor.log.info(f'Starting scrape for category {category_id}')
+    Actor.log.info(f'Starting scrape for category {category_id}')
     
     while jobs_scraped < max_results:
-        await Actor.log.info(f'Fetching page {page} (size: {page_size})...')
+        Actor.log.info(f'Fetching page {page} (size: {page_size})...')
         
         listings = await get_job_listings(client, category_id, page, page_size)
         
         if not listings:
-            await Actor.log.info(f'No more jobs found on page {page}')
+            Actor.log.info(f'No more jobs found on page {page}')
             break
         
-        await Actor.log.info(f'Found {len(listings)} jobs on page {page}')
+        Actor.log.info(f'Found {len(listings)} jobs on page {page}')
         
         for job_data in listings:
             if jobs_scraped >= max_results:
@@ -84,7 +84,7 @@ async def scrape_category(client: httpx.AsyncClient, category_id: int, max_resul
                 # Optionally fetch full description
                 if include_description and parsed_job.get('jobId'):
                     job_id = parsed_job['jobId']
-                    await Actor.log.debug(f'Fetching details for job {job_id}')
+                    Actor.log.debug(f'Fetching details for job {job_id}')
                     
                     detail_data = await get_job_detail(client, job_id)
                     if detail_data:
@@ -98,15 +98,15 @@ async def scrape_category(client: httpx.AsyncClient, category_id: int, max_resul
                 jobs_scraped += 1
                 
                 if jobs_scraped % 10 == 0:
-                    await Actor.log.info(f'Scraped {jobs_scraped} jobs so far...')
+                    Actor.log.info(f'Scraped {jobs_scraped} jobs so far...')
             
             except Exception as e:
-                await Actor.log.error(f'Error processing job: {e}')
+                Actor.log.error(f'Error processing job: {e}')
                 continue
         
         # Check if this was the last page
         if len(listings) < page_size:
-            await Actor.log.info('Reached last page of results')
+            Actor.log.info('Reached last page of results')
             break
         
         page += 1
@@ -120,7 +120,7 @@ async def scrape_category(client: httpx.AsyncClient, category_id: int, max_resul
 async def main():
     """Main actor entry point."""
     async with Actor:
-        await Actor.log.info('Hirist Tech Scraper starting...')
+        Actor.log.info('Hirist Tech Scraper starting...')
         
         # Get input
         actor_input = await Actor.get_input() or {}
@@ -149,16 +149,16 @@ async def main():
                     category_ids.append(int(cat))
         
         if not category_ids:
-            await Actor.log.warning('No valid categories found, defaulting to AI/ML (14)')
+            Actor.log.warning('No valid categories found, defaulting to AI/ML (14)')
             category_ids = [14]
         
-        await Actor.log.info(f'Config: categories={category_ids}, maxResults={max_results}, includeDescription={include_description}')
+        Actor.log.info(f'Config: categories={category_ids}, maxResults={max_results}, includeDescription={include_description}')
         
         if search_query:
-            await Actor.log.warning(f'Search query "{search_query}" specified but not supported by API (filtering in results would reduce dataset)')
+            Actor.log.warning(f'Search query "{search_query}" specified but not supported by API (filtering in results would reduce dataset)')
         
         if location_filter:
-            await Actor.log.warning(f'Location filter "{location_filter}" specified but not supported by API')
+            Actor.log.warning(f'Location filter "{location_filter}" specified but not supported by API')
         
         # Create HTTP client
         async with httpx.AsyncClient(timeout=30.0) as client:
@@ -168,7 +168,7 @@ async def main():
             results_per_category = max_results // len(category_ids) if len(category_ids) > 1 else max_results
             
             for category_id in category_ids:
-                await Actor.log.info(f'=== Scraping category {category_id} ===')
+                Actor.log.info(f'=== Scraping category {category_id} ===')
                 
                 try:
                     count = await scrape_category(
@@ -178,13 +178,13 @@ async def main():
                         include_description
                     )
                     total_scraped += count
-                    await Actor.log.info(f'Scraped {count} jobs from category {category_id}')
+                    Actor.log.info(f'Scraped {count} jobs from category {category_id}')
                 
                 except Exception as e:
-                    await Actor.log.error(f'Error scraping category {category_id}: {e}')
+                    Actor.log.error(f'Error scraping category {category_id}: {e}')
                     continue
         
-        await Actor.log.info(f'✅ Scraping complete! Total jobs: {total_scraped}')
+        Actor.log.info(f'✅ Scraping complete! Total jobs: {total_scraped}')
         
         # Save task metadata
         await Actor.set_value('SAVED-TASK', {

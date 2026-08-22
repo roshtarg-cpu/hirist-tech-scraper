@@ -24,9 +24,9 @@ async def fetch_json(url: str, params: Optional[Dict] = None, client: Optional[h
                 return response.json()
             except httpx.HTTPError as e:
                 if attempt == 2:
-                    await Actor.log.error(f'Failed to fetch {url} after 3 attempts: {e}')
+                    Actor.log.error(f'Failed to fetch {url} after 3 attempts: {e}')
                     return None
-                await Actor.log.warning(f'Attempt {attempt + 1} failed for {url}: {e}')
+                Actor.log.warning(f'Attempt {attempt + 1} failed for {url}: {e}')
                 await httpx.sleep(2 ** attempt)  # Exponential backoff
         
         return None
