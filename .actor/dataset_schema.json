@@ -4,102 +4,51 @@
   "fields": {
     "jobId": {
       "type": "integer",
-      "title": "Job ID",
-      "description": "Unique Hirist job identifier"
+      "title": "Job ID"
     },
     "title": {
       "type": "string",
-      "title": "Job Title",
-      "description": "Full job title including company name"
+      "title": "Job Title"
     },
     "url": {
       "type": "string",
-      "title": "Job URL",
-      "description": "Direct link to job posting on Hirist"
+      "title": "Job URL"
     },
     "company": {
       "type": "object",
-      "title": "Company Details",
-      "properties": {
-        "name": {"type": "string"},
-        "logo": {"type": "string"},
-        "rating": {"type": "number"},
-        "reviews": {"type": "integer"},
-        "about": {"type": "string"},
-        "founded": {"type": "string"},
-        "employees": {"type": "string"},
-        "headquarters": {"type": "string"},
-        "industry": {"type": "string"}
-      }
+      "title": "Company Details"
     },
     "experience": {
       "type": "object",
-      "title": "Experience Required",
-      "properties": {
-        "min": {"type": "integer"},
-        "max": {"type": "integer"}
-      }
+      "title": "Experience"
     },
     "salary": {
       "type": "object",
-      "title": "Salary Range",
-      "properties": {
-        "min": {"type": "integer"},
-        "max": {"type": "integer"},
-        "hidden": {"type": "boolean"},
-        "currency": {"type": "string"}
-      }
+      "title": "Salary Range"
     },
     "location": {
       "type": "array",
-      "title": "Job Locations",
-      "items": {"type": "string"}
+      "title": "Locations"
     },
     "skills": {
       "type": "array",
-      "title": "Required Skills",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {"type": "string"},
-          "mandatory": {"type": "boolean"}
-        }
-      }
+      "title": "Skills"
     },
     "metadata": {
       "type": "object",
-      "title": "Job Metadata",
-      "properties": {
-        "posted": {"type": "string"},
-        "premium": {"type": "boolean"},
-        "workFromHome": {"type": "boolean"},
-        "confidential": {"type": "boolean"},
-        "views": {"type": "integer"},
-        "applications": {"type": "integer"},
-        "category": {"type": "integer"}
-      }
+      "title": "Metadata"
     },
     "description": {
       "type": "object",
-      "title": "Job Description",
-      "properties": {
-        "html": {"type": "string"},
-        "text": {"type": "string"}
-      }
+      "title": "Description"
     },
     "recruiter": {
       "type": "object",
-      "title": "Recruiter Info",
-      "properties": {
-        "name": {"type": "string"},
-        "title": {"type": "string"},
-        "lastActive": {"type": "string"}
-      }
+      "title": "Recruiter"
     },
     "scrapedAt": {
       "type": "string",
-      "title": "Scraped At",
-      "description": "ISO 8601 timestamp"
+      "title": "Scraped At"
     }
   },
   "views": {
