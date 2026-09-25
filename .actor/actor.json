@@ -1,41 +1,19 @@
 {
+  "$schema": "https://apify.com/schemas/v1/actor.ide.json",
   "actorSpecification": 1,
   "name": "hirist-tech-scraper",
   "title": "Hirist Tech Scraper — India Jobs API for Claude & ChatGPT",
   "description": "Extract 60+ fields from Hirist.tech: AI/ML, DevOps, Backend jobs with salary, skills, company ratings & recruiter data. MCP-ready for AI agents.",
-  "version": "0.1",
+  "version": "1.0",
   "buildTag": "latest",
   "dockerfile": "./Dockerfile",
   "readme": "./README.md",
+  "inputSchema": "./input_schema.json",
+  "outputSchema": "./output_schema.json",
   "categories": [
     "JOBS"
   ],
   "storages": {
-    "dataset": {
-      "actorSpecification": 1,
-      "title": "Hirist Tech Jobs",
-      "views": {
-        "overview": {
-          "title": "All Jobs",
-          "transformation": {
-            "fields": [
-              "jobId",
-              "title",
-              "url",
-              "company",
-              "location",
-              "experience",
-              "skills"
-            ]
-          }
-        }
-      }
-    }
-  },
-  "pricingInfos": [
-    {
-      "perResult": 0.005,
-      "perRun": 0.05
-    }
-  ]
+    "dataset": "./dataset_schema.json"
+  }
 }
