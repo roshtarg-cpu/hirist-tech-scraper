@@ -1,56 +1,7 @@
 {
   "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
   "actorSpecification": 1,
-  "fields": {
-    "jobId": {
-      "type": "integer",
-      "title": "Job ID"
-    },
-    "title": {
-      "type": "string",
-      "title": "Job Title"
-    },
-    "url": {
-      "type": "string",
-      "title": "Job URL"
-    },
-    "company": {
-      "type": "object",
-      "title": "Company Details"
-    },
-    "experience": {
-      "type": "object",
-      "title": "Experience"
-    },
-    "salary": {
-      "type": "object",
-      "title": "Salary Range"
-    },
-    "location": {
-      "type": "array",
-      "title": "Locations"
-    },
-    "skills": {
-      "type": "array",
-      "title": "Skills"
-    },
-    "metadata": {
-      "type": "object",
-      "title": "Metadata"
-    },
-    "description": {
-      "type": "object",
-      "title": "Description"
-    },
-    "recruiter": {
-      "type": "object",
-      "title": "Recruiter"
-    },
-    "scrapedAt": {
-      "type": "string",
-      "title": "Scraped At"
-    }
-  },
+  "fields": {},
   "views": {
     "overview": {
       "title": "Job Overview",
